@@ -1,2 +1,3 @@
 # cassandra-practice
-cassandra base
+
+cassandra 学习
