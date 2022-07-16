@@ -1,4 +1,10 @@
-# person
+# 百科
+
+## workshop
+
+https://github.com/DataStax-Academy/cassandra-workshop-series
+
+## person
 
 [Avinash Lakshman]
 
