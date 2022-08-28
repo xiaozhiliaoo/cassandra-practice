@@ -11,6 +11,9 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <datastax.cassandra.version>3.7.0</datastax.cassandra.version>
+        <datastax.oss.version>4.14.1</datastax.oss.version>
+        <cassandra.server.version>4.0.4</cassandra.server.version>
     </properties>
 
     <dependencies>
@@ -18,19 +21,19 @@
         <dependency>
             <groupId>com.datastax.cassandra</groupId>
             <artifactId>cassandra-driver-core</artifactId>
-            <version>3.7.0</version>
+            <version>${datastax.cassandra.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.datastax.cassandra</groupId>
             <artifactId>cassandra-driver-mapping</artifactId>
-            <version>3.7.0</version>
+            <version>${datastax.cassandra.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.datastax.cassandra</groupId>
             <artifactId>cassandra-driver-extras</artifactId>
-            <version>3.7.0</version>
+            <version>${datastax.cassandra.version}</version>
         </dependency>
 
         <dependency>
@@ -44,6 +47,43 @@
             <artifactId>spring-boot-starter-data-cassandra</artifactId>
             <version>2.7.1</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.cassandra</groupId>
+            <artifactId>cassandra-all</artifactId>
+            <version>${cassandra.server.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.cassandraunit</groupId>
+            <artifactId>cassandra-unit</artifactId>
+            <version>4.3.1.0</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.datastax.oss</groupId>
+            <artifactId>java-driver-core</artifactId>
+            <version>${datastax.oss.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.datastax.oss</groupId>
+            <artifactId>java-driver-query-builder</artifactId>
+            <version>${datastax.oss.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.datastax.oss</groupId>
+            <artifactId>java-driver-mapper-runtime</artifactId>
+            <version>${datastax.oss.version}</version>
+        </dependency>
+
+
+
 
     </dependencies>
 
