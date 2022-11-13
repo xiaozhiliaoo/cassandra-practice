@@ -1,4 +1,4 @@
-# cassandra-practice
+# Cassandra Practice
 
 cassandra 学习
 
@@ -12,4 +12,6 @@ cassandra 学习
 
 ## 其他参考
 
-Cassandra权威指南第二版书籍源码：https://github.com/xiaozhiliaoo/cassandra-guide
+[Cassandra权威指南第二版书籍源码](https://github.com/xiaozhiliaoo/cassandra-guide)
+
+[Cassandra权威指南第三版书籍源码](https://github.com/xiaozhiliaoo/reservation-service)
