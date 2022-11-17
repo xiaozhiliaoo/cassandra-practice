@@ -30,15 +30,21 @@ class QueryServiceTest {
     }
 
     @Test
+    @DisplayName("清空表数据")
     void truncateTableData() {
+        service.truncateTableData();
     }
 
     @Test
+    @DisplayName("创建表结构")
     void createTableSchema() {
+        service.createTableSchema();
     }
 
     @Test
+    @DisplayName("删除表结构")
     void dropTableSchema() {
+        service.dropTableSchema();
     }
 
     @Test
@@ -101,5 +107,15 @@ class QueryServiceTest {
 
     @AfterClass
     static void tearDown() {
+    }
+
+    @Test
+    void insertGuest() {
+        service.insertGuest();
+    }
+
+    @Test
+    void mapperSaveGuestUsingOption() {
+        service.mapperSaveGuestUsingOption();
     }
 }

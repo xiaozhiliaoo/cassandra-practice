@@ -11,8 +11,8 @@ import java.util.Objects;
  * @date 2021/10/26 14:38
  */
 public final class Client {
-    public static final String NODES = "";
-    public static final String KEYSPACE = "";
+    public static final String NODES = "10.108.160.30";
+    public static final String KEYSPACE = "adaplearn_tiku_test";
 
     private static Cluster cluster;
     private static Session session;

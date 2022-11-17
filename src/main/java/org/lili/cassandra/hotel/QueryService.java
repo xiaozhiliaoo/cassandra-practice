@@ -5,8 +5,11 @@ import com.datastax.driver.core.querybuilder.BuiltStatement;
 import com.datastax.driver.core.querybuilder.Insert;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Truncate;
+import com.datastax.driver.core.schemabuilder.SchemaBuilder;
+import com.datastax.driver.core.schemabuilder.SchemaStatement;
 import com.datastax.driver.mapping.Mapper;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.lili.cassandra.hotel.model.*;
 import org.springframework.jmx.export.annotation.ManagedOperation;
@@ -54,6 +57,60 @@ public class QueryService {
     }
 
 
+    @ManagedOperation(description = "插入Guest")
+    public void insertGuest() {
+        UserType userType = cluster().getMetadata()
+                .getKeyspace(KEYSPACE)
+                .getUserType("address");
+
+        UDTValue address = userType.newValue()
+                .setString("street", "马连洼")
+                .setString("city", "北京")
+                .setString("state_or_province", "北京直辖市")
+                .setString("postal_code", "10000")
+                .setString("country", "中国");
+        Map<String, UDTValue> maps = new HashMap<>();
+        maps.put("1", address);
+        maps.put("2", address);
+        maps.put("3", address);
+        Insert guest = QueryBuilder.insertInto(TableName.guests)
+                .value("guest_id", UUID.randomUUID())
+                .value("first_name", "li")
+                .value("last_name", "li")
+                .value("title", "java developer")
+                .value("emails", Sets.newHashSet("1", "2", "3"))
+                .value("phone_numbers", Lists.newArrayList("110", "120", "119"))
+                .value("addresses", maps)
+                .ifNotExists();
+        session().execute(guest);
+        return;
+    }
+
+    @ManagedOperation(description = "mapperSaveGuestUsingOption 插入Guest")
+    public void mapperSaveGuestUsingOption() {
+        Mapper<Guests> mapper = mappingManager().mapper(Guests.class);
+        Guests guests = new Guests();
+        guests.setGuest_id(UUID.randomUUID());
+        //guests.setFirstName("li");
+        guests.setLastName("li2");
+        guests.setTitle("java");
+        guests.setEmails(Sets.newHashSet("1", "2", "3"));
+        guests.setPhoneNumbers(Lists.newArrayList("110", "120", "119"));
+        HashMap<String, Address> maps = Maps.newHashMap();
+        Address address = new Address("1", "1", "1", "1", "1");
+        maps.put("1", address);
+        maps.put("2", address);
+        maps.put("3", address);
+        guests.setAddresses(maps);
+
+        //mapper.save(guests, Mapper.Option.ifNotExists(true));
+        //mapper.save(guests, Mapper.Option.ttl(10));
+        //mapper.save(guests, Mapper.Option.saveNullFields(true));
+        mapper.save(guests, Mapper.Option.timestamp(System.currentTimeMillis()));
+        return;
+    }
+
+
     @ManagedOperation(description = "初始化所有数据(By QueryBuilder)")
     public void initTableData() {
         UserType userType = cluster().getMetadata()
@@ -72,6 +129,7 @@ public class QueryService {
                 .value("phone", "1111111")
                 .value("pois", Sets.newHashSet("1", "2", "3"))
                 .ifNotExists();
+        session().execute(insertHotel);
 
         Insert insertByDate = QueryBuilder.insertInto(TableName.reservations_by_hotel_date)
                 .value("hotel_id", "1")
@@ -89,7 +147,7 @@ public class QueryService {
                 .value("guest_id", UUID.randomUUID())
                 .ifNotExists();
 
-        session().execute(insertHotel);
+
         session().execute(insertByDate);
         return;
     }
@@ -104,10 +162,19 @@ public class QueryService {
     }
 
     public void createTableSchema() {
+        SchemaStatement create = SchemaBuilder.createTable(TableName.hotels2)
+                .addPartitionKey("id", DataType.text())
+                .addColumn("name", DataType.text())
+                .addColumn("phone", DataType.text())
+                .addColumn("address", DataType.text())
+                .addColumn("pois", DataType.set(DataType.text()));
+        session().execute(create);
         return;
     }
 
     public void dropTableSchema() {
+        SchemaStatement drop = SchemaBuilder.dropTable(TableName.hotels2);
+        session().execute(drop);
         return;
     }
 
