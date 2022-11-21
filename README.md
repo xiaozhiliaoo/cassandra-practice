@@ -1,14 +1,14 @@
 # Cassandra Practice
 
-cassandra 学习
+Cassandra学习
 
 ## 书籍
 
-[book](/book)
+[book](./book)
 
 ## 论文
 
-[paper](/paper)
+[paper](./paper)
 
 ## 其他参考
 
