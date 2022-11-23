@@ -10,6 +10,10 @@ Cassandra学习过程中整理的书籍，论文，和代码等。
 
 [paper](./paper)
 
+## Slides
+
+[Slides](./slides)
+
 ## 其他参考
 
 reading-note中的笔记[Cassandra](https://xiaozhiliaoo.github.io/reading-note/tech-learning/database/cassandra/toc.html)
