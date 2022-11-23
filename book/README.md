@@ -1,10 +1,7 @@
 # 书籍
 
-书籍包括Slides，英文，中文书。
+书籍包括英文，中文书。
 
-## Slides
-
-[DataBase-Cassandra](../slides/Database-Cassandra.pdf)
 
 ## 英文书籍
 
