@@ -4,7 +4,7 @@
 
 ## Slides
 
-[DataBase-Cassandra](./slides/Database-Cassandra.pdf)
+[DataBase-Cassandra](../slides/Database-Cassandra.pdf)
 
 ## 英文书籍
 
